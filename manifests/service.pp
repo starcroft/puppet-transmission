@@ -1,6 +1,6 @@
 # == Class: transmission::service
 #
-# Manages the transmission-daemon service and configuration replacement
+# Manages the transmission-daemon service and configuration replacement
 #
 # == Actions:
 #
@@ -18,7 +18,7 @@
 class transmission::service {
 
   exec { 'replace_transmission_config':
-    command     => "${::transmission::params::stop_cmd} && cp -a /etc/transmission-daemon/settings.json.puppet /etc/transmission-daemon/settings.json && ${::transmission::params::start_cmd}",
+    command     => "${::transmission::params::stop_cmd} && cp -a ${::transmission::config_dir}/settings.json.puppet ${::transmission::config_dir}/settings.json && ${::transmission::params::start_cmd}",
     refreshonly => true,
   }
 
@@ -51,7 +51,7 @@ class transmission::service {
   }
 
   if $::transmission::service_ensure == 'running' {
-    File <| title == '/etc/transmission-daemon/settings.json.puppet' |> {
+    File <| title == "${::transmission::config_dir}/settings.json.puppet" |> {
       notify => Exec['replace_transmission_config'],
     }
 

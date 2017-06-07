@@ -20,23 +20,34 @@ class transmission::config {
   # == Defaults
 
   File {
-    owner   => 'debian-transmission',
-    group   => 'debian-transmission',
+    owner   => "${::transmission::user}",
+    group   => "${::transmission::group}",
     require => Package[$::transmission::params::packages],
   }
 
   # == Transmission config
 
-  file { '/etc/transmission-daemon':
-    ensure => directory,
-    mode   => '0770',
+  file { "${::transmission::config_dir}":
+    ensure  => directory,
+    owner   => "${::transmission::user}",
+    group   => "${::transmission::group}",
+    mode    => 'u=rwx,g=rwxs,o=rx',
+    require => Package['transmission-cli','transmission-common','transmission-daemon'],
   }
 
-  file { '/etc/transmission-daemon/settings.json.puppet':
+  file { "${::transmission::config_dir}/settings.json.puppet":
+    ensure  => file,
+    owner   => "${::transmission::user}",
+    group   => "${::transmission::group}",
+    mode    => '0600',
+    content => template('transmission/settings.json.erb'),
+    require => File["${::transmission::config_dir}"],
+  }
+
+  file { "${::transmission::config_dir}/settings.json.puppet":
     ensure  => file,
     mode    => '0600',
     content => template('transmission/settings.json.erb'),
-    require => File['/etc/transmission-daemon'],
   }
 
   # == Transmission Home
@@ -44,11 +55,13 @@ class transmission::config {
   file { $::transmission::params::home_dir:
     ensure => directory,
     mode   => '0770',
+    owner   => "${::transmission::user}",
+    group   => "${::transmission::group}",
   }
 
   file { "${::transmission::params::home_dir}/settings.json":
     ensure  => link,
-    target  => '/etc/transmission-daemon/settings.json',
+    target  => "${::transmission::config_dir}/settings.json",
     require => File[$::transmission::params::home_dir],
   }
 

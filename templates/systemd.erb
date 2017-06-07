@@ -8,7 +8,14 @@ Description=Transmission BitTorrent Daemon
 After=network.target
 
 [Service]
+<% if scope['::transmission::user'] -%>
+User=<%= scope['::transmission::user'] %>
+<% else -%>
 User=debian-transmission
+<% end -%>
+<% if scope['::transmission::group'] -%>
+Group=<%= scope['::transmission::group'] %>
+<% end -%>
 Type=notify
 ExecStart=/usr/bin/transmission-daemon --foreground --config-dir <%= scope['::transmission::params::home_dir'] %><% if scope['::transmission::log_file'] -%> --logfile <%= scope['::transmission::log_file'] %><% end %>
 ExecReload=/bin/kill -s HUP $MAINPID

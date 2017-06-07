@@ -106,5 +106,12 @@
     "upload-limit": 100,
     "upload-limit-enabled": 0,
     "upload-slots-per-torrent": 14,
-    "utp-enabled": <%= scope['::transmission::utp_enabled'] %>
+    "utp-enabled": <%= scope['::transmission::utp_enabled'] %>,
+<% if scope['::transmission::watch_dir'] -%>
+    "watch-dir": <%= scope['::transmission::watch_dir'] %>,
+    "watch-dir-enabled": true
+<% else -%>
+    "watch-dir-enabled": false
+<% end -%>
+
 }

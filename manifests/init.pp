@@ -20,10 +20,12 @@ class transmission (
   Variant[Undef,String]  $blocklist_url         = undef,
   String                 $bind_address_ipv4     = '0.0.0.0',
   String                 $bind_address_ipv6     = '::',
+  String		 $config_dir            = '/etc/transmission-daemon',
   Boolean                $dht_enabled           = true,
   String                 $download_dir          = 'downloads',
   Variant[Undef,Integer] $download_queue_size   = undef,
   Integer                $encryption            = 1,
+  String		 $group			= 'debian-transmission',
   Variant[Undef,String]  $incomplete_dir        = undef,
   Variant[Undef,String]  $log_file              = undef,
   Boolean                $manage_ppa            = true,
@@ -44,7 +46,10 @@ class transmission (
   Boolean                $service_enable        = true,
   Variant[Undef,Integer] $speed_limit_down      = undef,
   Variant[Undef,Integer] $speed_limit_up        = undef,
+  String		 $umask			= undef,
+  String		 $user			= 'debian-tranmission',
   Boolean                $utp_enabled           = true,
+  String		 $watch_dir		= undef,
 ) {
 
   if $::osfamily != 'Debian' {
