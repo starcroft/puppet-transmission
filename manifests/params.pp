@@ -6,7 +6,8 @@ class transmission::params {
     'transmission-daemon',
   ]
 
-  if $facts['os']['release']['full'] == '16.04' {
+  #if $facts['os']['release']['full'] == '16.04' {
+  if ($::operatingsystem == 'Ubuntu' and versioncmp($::operatingsystemrelease, '16.04')) {
     $use_systemd = true
     $home_dir    = '/home/debian-transmission'
     $stop_cmd    = '/bin/systemctl stop transmission-daemon'

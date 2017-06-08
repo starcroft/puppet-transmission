@@ -44,24 +44,20 @@ class transmission::config {
     require => File["${::transmission::config_dir}"],
   }
 
-  file { "${::transmission::config_dir}/settings.json.puppet":
-    ensure  => file,
-    mode    => '0600',
-    content => template('transmission/settings.json.erb'),
-  }
-
   # == Transmission Home
 
   file { $::transmission::params::home_dir:
     ensure => directory,
     mode   => '0770',
-    owner   => "${::transmission::user}",
-    group   => "${::transmission::group}",
+    owner  => "${::transmission::user}",
+    group  => "${::transmission::group}",
   }
 
   file { "${::transmission::params::home_dir}/settings.json":
     ensure  => link,
     target  => "${::transmission::config_dir}/settings.json",
+    owner   => "${::transmission::user}",
+    group   => "${::transmission::group}",
     require => File[$::transmission::params::home_dir],
   }
 
