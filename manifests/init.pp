@@ -20,7 +20,6 @@ class transmission (
   Variant[Undef,String]  $blocklist_url           = undef,
   String                 $bind_address_ipv4       = '0.0.0.0',
   String                 $bind_address_ipv6       = '::',
-  String                 $config_dir              = '/etc/transmission-daemon',
   Boolean                $dht_enabled             = true,
   String                 $download_dir            = 'downloads',
   Variant[Undef,Integer] $download_queue_size     = undef,
