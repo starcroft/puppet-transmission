@@ -62,7 +62,7 @@
     "peer-port-random-on-start": false,
     "peer-socket-tos": "default",
     "pex-enabled": <%= scope['::transmission::pex_enabled'] %>,
-    "port-forwarding-enabled": false,
+    "port-forwarding-enabled": <%= scope['::transmission::port_forwarding_enabled'] %>,
     "preallocation": 1,
     "prefetch-enabled": 1,
     "queue-stalled-enabled": true,
