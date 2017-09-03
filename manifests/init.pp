@@ -47,7 +47,7 @@ class transmission (
   Variant[Undef,Integer] $speed_limit_down        = undef,
   Variant[Undef,Integer] $speed_limit_up          = undef,
   Variant[Undef,String]  $umask                   = undef,
-  String                 $user                    = 'debian-tranmission',
+  String                 $user                    = 'debian-transmission',
   Boolean                $utp_enabled             = true,
   Variant[Undef,String]  $watch_dir               = undef,
   Variant[Undef,String]	 $script_torrent_done_filename	= undef,
