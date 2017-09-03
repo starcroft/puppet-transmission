@@ -53,7 +53,7 @@ class transmission::config {
     group  => "${::transmission::group}",
   }
 
-  file { "${::transmission::params::config_dir}/settings.json":
+  file { "${::transmission::params::home_dir}/settings.json":
     ensure  => link,
     target  => '/etc/transmission-daemon/settings.json',
     owner   => "${::transmission::user}",
