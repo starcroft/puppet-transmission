@@ -63,7 +63,7 @@
     "peer-socket-tos": "default",
     "pex-enabled": <%= scope['::transmission::pex_enabled'] %>,
     "port-forwarding-enabled": <%= scope['::transmission::port_forwarding_enabled'] %>,
-    "preallocation": 1,
+    "preallocation": <%= scope['::transmission::preallocation'] %>,
     "prefetch-enabled": 1,
     "queue-stalled-enabled": true,
     "queue-stalled-minutes": 30,
@@ -94,8 +94,13 @@
     "rpc-whitelist-enabled": false,
 <% end -%>
     "scrape-paused-torrents-enabled": true,
+<% if scope['::transmission::script_torrent_done_filename'] -%>
+    "script-torrent-done-enabled": true,
+    "script-torrent-done-filename": "<%= scope['::transmission::script_torrent_done_filename'] %>",
+<% else -%>
     "script-torrent-done-enabled": false,
     "script-torrent-done-filename": "",
+<% end -%>
     "seed-queue-enabled": false,
     "seed-queue-size": 10,
 <% if scope['::transmission::speed_limit_down'] -%>

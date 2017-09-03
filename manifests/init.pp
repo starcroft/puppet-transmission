@@ -50,6 +50,8 @@ class transmission (
   String                 $user                    = 'debian-tranmission',
   Boolean                $utp_enabled             = true,
   Variant[Undef,String]  $watch_dir               = undef,
+  Variant[Undef,String]	 $script_torrent_done_filename	= undef,
+  Integer		 $preallocation			= 1,
 ) {
 
   if $::osfamily != 'Debian' {
