@@ -15,7 +15,7 @@ class transmission::params {
     $start_cmd   = '/bin/systemctl start transmission-daemon'
   } elsif $facts['os']['lsb']['distid'] == "Raspbian" and $facts['os']['lsb']['distcodename'] == "jessie" {
     $use_systemd = true
-    $home_dir    = '/var/lib/transmission-daemon'
+    $home_dir    = '/var/lib/transmission-daemon/.config/transmission-daemon'
     $config_dir  = '/etc/transmission-daemon'
     $stop_cmd    = '/bin/systemctl stop transmission-daemon'
     $start_cmd   = '/bin/systemctl start transmission-daemon'
